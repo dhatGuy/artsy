@@ -26,8 +26,20 @@ const baskervville = Baskervville({
 
 const clashDisplay = localFont({
   variable: "--font-clash-display",
-  src: "../public/fonts/ClashDisplay-Bold.ttf",
-  weight: "700",
+  src: [
+    {
+      path: "../public/fonts/ClashDisplay-Medium.ttf",
+      weight: "500",
+    },
+    {
+      path: "../public/fonts/ClashDisplay-Semibold.ttf",
+      weight: "600",
+    },
+    {
+      path: "../public/fonts/ClashDisplay-Bold.ttf",
+      weight: "700",
+    },
+  ],
 });
 
 const satoshi = localFont({

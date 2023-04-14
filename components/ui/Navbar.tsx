@@ -33,20 +33,20 @@ function Navbar() {
   }, [isOpen]);
 
   return (
-    <header className={cn("container px-4 py-4 mx-auto")}>
+    <header className={cn("container mx-auto p-4")}>
       <nav className={cn("flex justify-between p-2 md:p-4")}>
-        <button onClick={toggle} className="md:hidden outline-none">
+        <button onClick={toggle} className="outline-none md:hidden">
           <AlignJustify />
         </button>
 
-        <h1 className="font-stix-two font-bold text-2xl mt-1.5">ARTSY.</h1>
+        <h1 className="mt-1.5 font-stix-two text-2xl font-bold">ARTSY.</h1>
 
-        <ul className="hidden md:flex gap-10">
+        <ul className="hidden gap-10 md:flex">
           {navigation.map((item) => (
             <li
               key={item.name}
               className={cn(
-                item.current && "underline font-medium",
+                item.current && "font-medium underline",
                 "block rounded-md text-2xl"
               )}
               aria-current={item.current ? "page" : undefined}
@@ -66,12 +66,12 @@ function Navbar() {
       <nav
         className={cn(
           isOpen ? "block" : "hidden",
-          "absolute top-0 right-0 left-0 bg-white lg:hidden min-h-full"
+          "absolute inset-x-0 top-0 min-h-full bg-white lg:hidden"
         )}
       >
-        <div className="flex flex-col gap-16 px-8 pt-8 relative h-full">
-          <div className="flex justify-between items-center">
-            <h2 className="font-stix-two scroll-m-20 text-2xl font-bold uppercase">
+        <div className="relative flex h-full flex-col gap-16 px-8 pt-8">
+          <div className="flex items-center justify-between">
+            <h2 className="scroll-m-20 font-stix-two text-2xl font-bold uppercase">
               Artsy.
             </h2>
 
@@ -85,7 +85,7 @@ function Navbar() {
               <li
                 key={item.name}
                 className={cn(
-                  item.current && "underline font-medium",
+                  item.current && "font-medium underline",
                   "block rounded-md text-2xl"
                 )}
                 aria-current={item.current ? "page" : undefined}
@@ -95,7 +95,7 @@ function Navbar() {
             ))}
           </ul>
         </div>
-        <button className="bg-[#3341C1] rounded-full absolute bottom-10 flex justify-center items-center right-10 w-14 h-14">
+        <button className="absolute bottom-10 right-10 flex h-14 w-14 items-center justify-center rounded-full bg-[#3341C1]">
           <MessageSquare color="#fff" fill="white" size={34} />
         </button>
       </nav>
