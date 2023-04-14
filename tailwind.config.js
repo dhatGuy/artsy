@@ -11,6 +11,9 @@ module.exports = {
     extend: {
       colors: {
         black: "#292929",
+        gray: {
+          DEFAULT: "#333333",
+        },
       },
       fontFamily: {
         serif: ["var(--font-bellefair)", ...fontFamily.sans],
