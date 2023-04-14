@@ -66,10 +66,10 @@ function Navbar() {
       <nav
         className={cn(
           isOpen ? "block" : "hidden",
-          "absolute top-0 right-0 left-0 bottom-0 bg-white lg:hidden h-screen"
+          "absolute top-0 right-0 left-0 bg-white lg:hidden min-h-full"
         )}
       >
-        <div className="flex flex-col gap-16 px-8 pt-8">
+        <div className="flex flex-col gap-16 px-8 pt-8 relative h-full">
           <div className="flex justify-between items-center">
             <h2 className="font-stix-two scroll-m-20 text-2xl font-bold uppercase">
               Artsy.
@@ -94,11 +94,10 @@ function Navbar() {
               </li>
             ))}
           </ul>
-
-          <button className="bg-[#3341C1] rounded-full absolute bottom-10 flex justify-center items-center right-10 w-14 h-14">
-            <MessageSquare color="#fff" fill="white" size={34} />
-          </button>
         </div>
+        <button className="bg-[#3341C1] rounded-full absolute bottom-10 flex justify-center items-center right-10 w-14 h-14">
+          <MessageSquare color="#fff" fill="white" size={34} />
+        </button>
       </nav>
       {/* mobile nav end */}
     </header>
