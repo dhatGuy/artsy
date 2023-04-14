@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        black: "#292929",
+      },
       fontFamily: {
         serif: ["var(--font-bellefair)", ...fontFamily.sans],
         sans: ["var(--font-satoshi)", ...fontFamily.serif],

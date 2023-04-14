@@ -1,5 +1,6 @@
 import { Baskervville, Bellefair, STIX_Two_Text } from "next/font/google";
 import localFont from "next/font/local";
+import Navbar from "~/components/ui/Navbar";
 import "./globals.css";
 
 const bellefair = Bellefair({
@@ -70,7 +71,10 @@ export default function RootLayout({
       lang="en"
       className={`${bellefair.variable} ${stixTwo.variable} ${baskervville.variable} ${satoshi.variable} ${clashDisplay.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
