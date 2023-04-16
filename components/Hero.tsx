@@ -6,7 +6,7 @@ import Carousel from "./ui/Carousel";
 
 function Hero() {
   return (
-    <div className={cn("overflow-hidden")}>
+    <div className="overflow-hidden px-4">
       <div className="flex flex-col items-center space-y-10">
         <h2
           className={cn(
@@ -31,7 +31,7 @@ function Hero() {
       {/* mobile stacked images */}
       <div
         className={cn(
-          "relative mx-auto my-14 grid w-fit place-content-center md:hidden"
+          "relative mx-auto my-14 grid w-fit place-content-center px-10 md:hidden"
         )}
       >
         <div className="absolute right-0 top-0 h-9 w-9 rounded-full bg-[#006CA2] blur-xl" />
