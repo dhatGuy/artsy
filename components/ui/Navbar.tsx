@@ -66,7 +66,7 @@ function Navbar() {
       <nav
         className={cn(
           isOpen ? "block" : "hidden",
-          "absolute inset-x-0 top-0 min-h-full bg-white lg:hidden"
+          "absolute inset-x-0 top-0 z-10 min-h-full bg-white lg:hidden"
         )}
       >
         <div className="relative flex h-full flex-col gap-16 px-8 pt-8">
