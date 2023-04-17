@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { cn } from "~/lib/utils";
-import Carousel from "./ui/Carousel";
+import Carousel from "../ui/Carousel";
 
 function Hero() {
   return (
@@ -31,7 +31,7 @@ function Hero() {
       {/* mobile stacked images */}
       <div
         className={cn(
-          "relative mx-auto my-14 grid w-fit place-content-center px-10 md:hidden"
+          "relative mx-auto my-14 grid w-fit place-content-center px-5 md:hidden"
         )}
       >
         <div className="absolute right-0 top-0 h-9 w-9 rounded-full bg-[#006CA2] blur-xl" />
