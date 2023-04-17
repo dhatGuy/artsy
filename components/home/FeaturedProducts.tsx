@@ -27,13 +27,13 @@ const CircledArrow = () => (
 function FeaturedProducts() {
   return (
     <div className="container mx-auto my-32">
-      <div className="space-y-10 px-2 text-gray">
+      <div className="space-y-6 px-2 text-gray">
         <h2 className="text-[28px] font-bold">Featured Products</h2>
 
         <div className="flex flex-col gap-10">
           {imgs.map(({ path, title }, i) => (
             <div key={i}>
-              <hr className="my-14 hidden h-[0.5px] border-0 bg-[#333] md:block" />
+              <hr className="mb-10 hidden h-[0.5px] border-0 bg-[#333] md:block" />
               <div className={cn("flex flex-col gap-10", "md:flex-row")}>
                 <div
                   className={cn("group grid h-[256px] md:w-1/2", {
