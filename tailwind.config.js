@@ -9,6 +9,27 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        auctionBg1: `
+        linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)), 
+        url("/images/antenna.jpg"),
+        linear-gradient(104.57deg, rgba(0, 0, 0, 0) 21.03%, rgba(0, 0, 0, 0.2) 56.5%, rgba(0, 0, 0, 0.2) 93.84%)`,
+
+        auctionBg2: `
+        linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)), 
+        url("/images/ghost.jpg"),
+        linear-gradient(104.57deg, rgba(0, 0, 0, 0) 21.03%, rgba(0, 0, 0, 0.2) 56.5%, rgba(0, 0, 0, 0.2) 93.84%)`,
+
+        auctionBg3: `
+        linear-gradient(0deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.52)), 
+        url("/images/sink.jpg"),
+        linear-gradient(104.57deg, rgba(0, 0, 0, 0) 21.03%, rgba(0, 0, 0, 0.2) 56.5%, rgba(0, 0, 0, 0.2) 93.84%)`,
+      },
+      backgroundSize: {
+        auctionBg1: "100%",
+        auctionBg2: "100%",
+        auctionBg3: "100%",
+      },
       colors: {
         black: "#292929",
         gray: {
