@@ -1,7 +1,7 @@
 import { Variants, motion } from "framer-motion";
-import Image, { ImageProps } from "next/image";
-import { forwardRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
+import MotionImg from "./MotionImg";
 
 const carouseImages = [
   { path: "/images/ruslan-zaplatin.jpg", h: "h-[332px]" },
@@ -10,15 +10,6 @@ const carouseImages = [
   { path: "/images/andre-lergier.jpg", h: "h-[428px]" },
   { path: "/images/impermanent.jpg", h: "h-[428px]" },
 ];
-
-const ExoticImage = forwardRef<HTMLImageElement, ImageProps>(
-  function ExoticImageWrapper(props, ref) {
-    // eslint-disable-next-line jsx-a11y/alt-text
-    return <Image {...props} ref={ref} />;
-  }
-);
-
-const MotionImg = motion(ExoticImage);
 
 const variants: Variants = {
   start: (x) => ({

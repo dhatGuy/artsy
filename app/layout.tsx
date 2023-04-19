@@ -28,6 +28,18 @@ const clashDisplay = localFont({
   variable: "--font-clash-display",
   src: [
     {
+      path: "../public/fonts/ClashDisplay-Extralight.ttf",
+      weight: "200",
+    },
+    {
+      path: "../public/fonts/ClashDisplay-Light.ttf",
+      weight: "300",
+    },
+    {
+      path: "../public/fonts/ClashDisplay-Regular.ttf",
+      weight: "400",
+    },
+    {
       path: "../public/fonts/ClashDisplay-Medium.ttf",
       weight: "500",
     },

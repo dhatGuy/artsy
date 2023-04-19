@@ -1,5 +1,6 @@
 import FeaturedProducts from "~/components/home/FeaturedProducts";
 import Hero from "~/components/home/Hero";
+import TopCreators from "~/components/home/TopCreators";
 import Upcoming from "~/components/home/Upcoming";
 import { CircledArrow } from "~/components/ui";
 import { cn } from "~/lib/utils";
@@ -50,7 +51,7 @@ export default function Home() {
             )}
             key={index}
           >
-            <h2 className="text-2xl font-medium md:text-gray md:text-5xl">
+            <h2 className="text-2xl font-medium md:text-5xl md:text-gray">
               {item.title}
             </h2>
             <Arrow className="hidden md:block lg:mr-64" />
@@ -61,6 +62,8 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <TopCreators />
     </section>
   );
 }
