@@ -1,5 +1,6 @@
 import { Baskervville, Bellefair, STIX_Two_Text } from "next/font/google";
 import localFont from "next/font/local";
+import Footer from "~/components/Footer";
 import Navbar from "~/components/ui/Navbar";
 import "./globals.css";
 
@@ -98,6 +99,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
