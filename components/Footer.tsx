@@ -81,7 +81,7 @@ function Footer() {
           </h2>
         </div>
 
-        <div className="hidden md:block ">
+        <div className="col-span-2 hidden md:block lg:col-span-1 ">
           <ul className="flex flex-col gap-5">
             {mainNav.map((item) => (
               <li key={item.title} className="text-[26px] font-light">
@@ -91,7 +91,7 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="hidden md:block">
+        <div className="col-span-2 hidden md:block lg:col-span-1">
           <ul className="flex flex-col gap-5">
             {secondaryNav.map((item) => (
               <li key={item.title} className="text-[26px] font-light">
@@ -101,7 +101,7 @@ function Footer() {
           </ul>
         </div>
 
-        <div className="col-span-full flex flex-col gap-y-6 md:col-span-2">
+        <div className="col-span-full flex flex-col gap-y-6 md:hidden lg:col-span-2 lg:flex">
           <div className="text-sm font-light uppercase md:hidden">Reach us</div>
           <div className="flex items-center gap-4">
             <Mail />
