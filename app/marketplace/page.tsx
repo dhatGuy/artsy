@@ -166,15 +166,17 @@ function Marketplace() {
           ))}
         </div>
 
-        <div className="flex justify-end">
-          <Button variant="ghost" className="h-auto" onClick={handleLoadMore}>
-            Load More{" "}
-            <CircledArrow
-              className="ml-4 h-[53px] w-[53px] border-black"
-              fill="#616161"
-            />
-          </Button>
-        </div>
+        {data.length < itemsData.length && (
+          <div className="flex justify-end">
+            <Button variant="ghost" className="h-auto" onClick={handleLoadMore}>
+              Load More{" "}
+              <CircledArrow
+                className="ml-4 h-[53px] w-[53px] border-black"
+                fill="#616161"
+              />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
