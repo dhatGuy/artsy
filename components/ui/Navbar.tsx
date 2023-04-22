@@ -40,7 +40,12 @@ function Navbar() {
           <AlignJustify />
         </button>
 
-        <h1 className="mt-1.5 font-stix-two text-2xl font-bold">ARTSY.</h1>
+        <Link
+          href="/"
+          className="mt-1.5 cursor-pointer font-stix-two text-2xl font-bold"
+        >
+          ARTSY.
+        </Link>
 
         <ul className="hidden gap-10 md:flex">
           {navigation.map((item) => (

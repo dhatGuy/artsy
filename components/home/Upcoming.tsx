@@ -21,7 +21,7 @@ function Upcoming() {
   }, []);
 
   return (
-    <div className="h-auto md:h-[90vh]">
+    <div className="md:min-h-[900px]">
       <div
         className={cn(
           "flex h-full flex-col bg-gradient-to-r from-[#4693ED] via-[#79C2D2] to-[#C056097D] p-10 md:px-20"
@@ -53,7 +53,7 @@ function Upcoming() {
           autoplay={false}
           loop={true}
           ref={sliderRef}
-          className="h-full w-full"
+          className="h-[250px] w-full md:h-[500px]"
         >
           {Array.from({ length: 3 }).map((_, i) => (
             <SwiperSlide
