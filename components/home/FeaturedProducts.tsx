@@ -50,8 +50,9 @@ function FeaturedProducts() {
                       >
                         {title}
                       </h2>
-
-                      <CircledArrow className="absolute bottom-10 right-12 ml-auto border-white" />
+                      <a href="#">
+                        <CircledArrow className="absolute bottom-10 right-12 ml-auto border-white" />
+                      </a>
                     </div>
 
                     <div className="hidden h-full items-center justify-center  gap-4 group-hover:md:flex">

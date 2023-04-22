@@ -1,3 +1,5 @@
+"use client";
+
 import FeaturedProducts from "~/components/home/FeaturedProducts";
 import Hero from "~/components/home/Hero";
 import TopCreators from "~/components/home/TopCreators";

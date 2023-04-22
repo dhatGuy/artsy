@@ -7,8 +7,7 @@ const CircledArrow = ({
   className?: string;
   fill?: string;
 }) => (
-  <a
-    href="#"
+  <div
     className={cn(
       "flex h-20 w-20 items-center justify-center rounded-full border",
       className
@@ -28,7 +27,7 @@ const CircledArrow = ({
         fill={fill}
       />
     </svg>
-  </a>
+  </div>
 );
 
 export default CircledArrow;
