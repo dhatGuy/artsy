@@ -53,13 +53,13 @@ function Upcoming() {
           autoplay={false}
           loop={true}
           ref={sliderRef}
-          className="h-[250px] w-full md:h-[500px]"
+          className="min-h-[270px] w-full md:h-[500px]"
         >
           {Array.from({ length: 3 }).map((_, i) => (
             <SwiperSlide
               key={i}
               className={cn(
-                "flex h-full flex-col flex-wrap items-start justify-between md:flex-row",
+                "flex flex-wrap items-end md:justify-between",
                 "px-2 py-8 text-white md:px-6",
                 { "bg-auctionBg1": i === 0 },
                 { "bg-auctionBg2": i === 1 },
@@ -88,7 +88,7 @@ function Upcoming() {
                   </p>
                 </div>
               </div>
-              <div className="mt-3 flex items-center justify-end gap-10 self-end">
+              <div className="ml-auto mt-3 flex items-center justify-end gap-10 self-end">
                 <a href="#" className="text-sm underline">
                   See more
                 </a>

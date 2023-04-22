@@ -90,6 +90,7 @@ function Navbar() {
             {navigation.map((item) => (
               <li
                 key={item.name}
+                onClick={toggle}
                 className={cn(
                   item.current && "font-medium underline",
                   "block rounded-md text-2xl"
