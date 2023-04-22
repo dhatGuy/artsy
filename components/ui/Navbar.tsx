@@ -7,14 +7,15 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
 
 const navigation = [
-  { name: "Home", href: "#", current: true },
-  { name: "Auctions", href: "#", current: false },
-  { name: "Marketplace", href: "#", current: false },
-  { name: "Drops", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Auctions", href: "/auctions", current: false },
+  { name: "Marketplace", href: "/marketplace", current: false },
+  { name: "Drops", href: "/drops", current: false },
 ];
 
 function Navbar() {
@@ -51,7 +52,7 @@ function Navbar() {
               )}
               aria-current={item.current ? "page" : undefined}
             >
-              {item.name}
+              <Link href={item.href}>{item.name}</Link>
             </li>
           ))}
         </ul>
@@ -90,7 +91,7 @@ function Navbar() {
                 )}
                 aria-current={item.current ? "page" : undefined}
               >
-                {item.name}
+                <Link href={item.href}>{item.name}</Link>
               </li>
             ))}
           </ul>

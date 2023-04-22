@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { cn } from "~/lib/utils";
 import { Mail, MapPin } from "./icons";
 import { Button } from "./ui/button";
@@ -43,7 +44,7 @@ const secondaryNav = [
 
 function Footer() {
   return (
-    <section className="space-y-8 bg-white px-6 pb-6 pt-20 md:space-y-20 md:pt-28">
+    <footer className="space-y-8 bg-white px-6 pb-6 pt-20 md:space-y-20 md:pt-28">
       <div className="space-y-5 border-black md:mx-4 md:space-y-8 md:border md:py-10 md:text-center">
         <div className="space-y-4 md:space-y-7">
           <h2 className="font-baskervville text-2xl uppercase md:text-3xl">
@@ -85,7 +86,7 @@ function Footer() {
           <ul className="flex flex-col gap-5">
             {mainNav.map((item) => (
               <li key={item.title} className="text-[26px] font-light">
-                {item.title}
+                <Link href={item.href}>{item.title}</Link>
               </li>
             ))}
           </ul>
@@ -105,12 +106,12 @@ function Footer() {
           <div className="text-sm font-light uppercase md:hidden">Reach us</div>
           <div className="flex items-center gap-4">
             <Mail />
-            <a
+            <Link
               href="mailto:artsystudios@gmail.com"
               className="text-xs font-light md:text-[26px]"
             >
               artsystudios@gmail.com
-            </a>
+            </Link>
           </div>
           <div className="flex items-center gap-4">
             <MapPin />
@@ -126,7 +127,7 @@ function Footer() {
           </span>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }
 

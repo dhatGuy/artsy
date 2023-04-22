@@ -141,7 +141,7 @@ function Marketplace() {
               className="bg-white sm:rounded-xl sm:p-4 sm:drop-shadow-lg md:max-w-[269px]"
             >
               <Link
-                href={`/marketplace/${item.id}`}
+                href={`/marketplace/${item.slug}`}
                 className="group mb-2 block h-[384px] w-auto overflow-hidden object-cover drop-shadow-lg sm:h-[280px] md:rounded-lg lg:mb-3"
               >
                 <Image
