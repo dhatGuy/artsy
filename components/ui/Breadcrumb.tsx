@@ -19,7 +19,7 @@ function Breadcrumb({
         <a
           href="#"
           key={item}
-          className={cn({
+          className={cn("font-medium", {
             "text-[#BCB7B7]": index < items.length - 1,
             "text-black cursor-default": index === items.length - 1,
           })}
