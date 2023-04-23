@@ -1,5 +1,12 @@
+"use client";
+
+import "swiper/swiper-bundle.min.css";
+
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { itemsData } from "~/DATA/items";
 import { Breadcrumb } from "~/components/ui";
 import {
@@ -10,6 +17,7 @@ import {
 } from "~/components/ui/accordion";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
+import { cn } from "~/lib/utils";
 
 function Page({
   params,
@@ -18,6 +26,19 @@ function Page({
     slug: string;
   };
 }) {
+  const sliderRef = useRef<SwiperRef | null>(null);
+  const [index, setIndex] = useState(0);
+
+  const handlePrev = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback(() => {
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
+
   const item = itemsData.find((item) => item.slug === params.slug)!;
 
   const breadcrumbItems = ["Home", "Marketplace", "Editorials", item.name];
@@ -62,7 +83,6 @@ function Page({
                 />
               </svg>
               <span className="font-stix-two text-3xl font-medium">
-                {/* at least 0.05 */}
                 {Math.random().toFixed(2)}
               </span>
             </div>
@@ -140,7 +160,7 @@ function Page({
                 value="item-1"
                 className="border-gray px-4 py-2 sm:border-t"
               >
-                <AccordionTrigger className="text-2xl font-medium hover:no-underline">
+                <AccordionTrigger className="text-lg font-medium hover:no-underline sm:text-2xl">
                   Description
                 </AccordionTrigger>
                 <AccordionContent className="pt-1">
@@ -153,7 +173,7 @@ function Page({
 
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1" className="border-gray px-4 py-2">
-                <AccordionTrigger className="text-2xl font-medium hover:no-underline">
+                <AccordionTrigger className="text-lg font-medium hover:no-underline sm:text-2xl">
                   Listings
                 </AccordionTrigger>
                 <AccordionContent className="pt-1">
@@ -169,7 +189,7 @@ function Page({
                 value="item-1"
                 className="border-gray px-4 py-2 sm:border-none"
               >
-                <AccordionTrigger className="text-2xl font-medium hover:no-underline">
+                <AccordionTrigger className="text-lg font-medium hover:no-underline sm:text-2xl">
                   Status
                 </AccordionTrigger>
                 <AccordionContent className="pt-1">
@@ -181,6 +201,206 @@ function Page({
             </Accordion>
           </div>
         </div>
+      </div>
+
+      <div className="mx-4 mt-16 space-y-8 sm:hidden">
+        <h2 className="text-xl font-medium">More from this collection</h2>
+        <div className="relative">
+          <Swiper
+            ref={sliderRef}
+            onRealIndexChange={(swiper) => setIndex(swiper.realIndex)}
+          >
+            {itemsData
+              .filter((data) => data.slug !== item.slug)
+              .slice(2, 6)
+              .map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="space-y-2 border border-black px-4 py-2">
+                    <Heart className="ml-auto w-fit" />
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="h-[421px] w-full object-cover"
+                      width={500}
+                      height={500}
+                    />
+                    <div className="flex justify-between text-lg font-medium">
+                      <span className="">{item.name}</span>
+
+                      <div className="flex items-center gap-2">
+                        <svg
+                          width="21"
+                          height="26"
+                          viewBox="0 0 21 26"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
+                            fill="#333333"
+                          />
+                        </svg>
+
+                        <span>{Math.random().toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+
+          <Button
+            variant="ghost"
+            className={cn(
+              "absolute left-6 top-[50%] z-10 flex h-[60px] w-[60px]",
+              "rotate-180 items-center justify-center rounded-full border border-white"
+            )}
+            disabled={index === 0}
+            onClick={handlePrev}
+          >
+            <svg
+              width="35"
+              height="46"
+              viewBox="0 0 35 46"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24.004 21.9175L11.8324 10.3018C11.6293 10.1079 11.3595 9.99976 11.0789 9.99976C10.7983 9.99976 10.5285 10.1079 10.3254 10.3018L10.3123 10.315C10.2135 10.409 10.1348 10.5221 10.0811 10.6475C10.0273 10.773 9.99961 10.908 9.99961 11.0445C9.99961 11.181 10.0273 11.316 10.0811 11.4415C10.1348 11.5669 10.2135 11.68 10.3123 11.774L21.7741 22.7115L10.3123 33.6447C10.2135 33.7387 10.1348 33.8518 10.0811 33.9772C10.0273 34.1026 9.99961 34.2377 9.99961 34.3742C9.99961 34.5107 10.0273 34.6457 10.0811 34.7711C10.1348 34.8966 10.2135 35.0097 10.3123 35.1037L10.3254 35.1168C10.5285 35.3108 10.7983 35.4189 11.0789 35.4189C11.3595 35.4189 11.6293 35.3108 11.8324 35.1168L24.004 23.5012C24.1111 23.3991 24.1963 23.2762 24.2545 23.1401C24.3127 23.004 24.3428 22.8574 24.3428 22.7093C24.3428 22.5613 24.3127 22.4147 24.2545 22.2786C24.1963 22.1425 24.1111 22.0196 24.004 21.9175Z"
+                fill="white"
+              />
+            </svg>
+          </Button>
+          <Button
+            variant="ghost"
+            className={cn(
+              "absolute right-6 top-[50%] z-10 flex",
+              "h-[60px] w-[60px] items-center justify-center rounded-full border border-white"
+            )}
+            disabled={index === 2}
+            onClick={handleNext}
+          >
+            <svg
+              width="35"
+              height="46"
+              viewBox="0 0 35 46"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24.004 21.9175L11.8324 10.3018C11.6293 10.1079 11.3595 9.99976 11.0789 9.99976C10.7983 9.99976 10.5285 10.1079 10.3254 10.3018L10.3123 10.315C10.2135 10.409 10.1348 10.5221 10.0811 10.6475C10.0273 10.773 9.99961 10.908 9.99961 11.0445C9.99961 11.181 10.0273 11.316 10.0811 11.4415C10.1348 11.5669 10.2135 11.68 10.3123 11.774L21.7741 22.7115L10.3123 33.6447C10.2135 33.7387 10.1348 33.8518 10.0811 33.9772C10.0273 34.1026 9.99961 34.2377 9.99961 34.3742C9.99961 34.5107 10.0273 34.6457 10.0811 34.7711C10.1348 34.8966 10.2135 35.0097 10.3123 35.1037L10.3254 35.1168C10.5285 35.3108 10.7983 35.4189 11.0789 35.4189C11.3595 35.4189 11.6293 35.3108 11.8324 35.1168L24.004 23.5012C24.1111 23.3991 24.1963 23.2762 24.2545 23.1401C24.3127 23.004 24.3428 22.8574 24.3428 22.7093C24.3428 22.5613 24.3127 22.4147 24.2545 22.2786C24.1963 22.1425 24.1111 22.0196 24.004 21.9175Z"
+                fill="white"
+              />
+            </svg>
+          </Button>
+        </div>
+      </div>
+
+      <div className="mt-20 hidden flex-col gap-20 sm:flex">
+        <div className="flex items-center justify-between rounded-xl p-4 shadow-lg">
+          <span className="text-2xl font-medium">
+            More from this collection
+          </span>
+
+          <div className="flex items-center gap-7">
+            <Button
+              variant="ghost"
+              className={cn(
+                "flex h-[50px] w-[50px] rotate-180 items-center justify-center rounded-full border border-gray"
+              )}
+              disabled={index === 0}
+              onClick={handlePrev}
+            >
+              <svg
+                width="35"
+                height="46"
+                viewBox="0 0 35 46"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24.004 21.9175L11.8324 10.3018C11.6293 10.1079 11.3595 9.99976 11.0789 9.99976C10.7983 9.99976 10.5285 10.1079 10.3254 10.3018L10.3123 10.315C10.2135 10.409 10.1348 10.5221 10.0811 10.6475C10.0273 10.773 9.99961 10.908 9.99961 11.0445C9.99961 11.181 10.0273 11.316 10.0811 11.4415C10.1348 11.5669 10.2135 11.68 10.3123 11.774L21.7741 22.7115L10.3123 33.6447C10.2135 33.7387 10.1348 33.8518 10.0811 33.9772C10.0273 34.1026 9.99961 34.2377 9.99961 34.3742C9.99961 34.5107 10.0273 34.6457 10.0811 34.7711C10.1348 34.8966 10.2135 35.0097 10.3123 35.1037L10.3254 35.1168C10.5285 35.3108 10.7983 35.4189 11.0789 35.4189C11.3595 35.4189 11.6293 35.3108 11.8324 35.1168L24.004 23.5012C24.1111 23.3991 24.1963 23.2762 24.2545 23.1401C24.3127 23.004 24.3428 22.8574 24.3428 22.7093C24.3428 22.5613 24.3127 22.4147 24.2545 22.2786C24.1963 22.1425 24.1111 22.0196 24.004 21.9175Z"
+                  fill="#616161"
+                />
+              </svg>
+            </Button>
+            <Button
+              variant="ghost"
+              className={cn(
+                "flex h-[50px] w-[50px] items-center justify-center rounded-full border border-gray"
+              )}
+              disabled={index === 2}
+              onClick={handleNext}
+            >
+              <svg
+                width="35"
+                height="46"
+                viewBox="0 0 35 46"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M24.004 21.9175L11.8324 10.3018C11.6293 10.1079 11.3595 9.99976 11.0789 9.99976C10.7983 9.99976 10.5285 10.1079 10.3254 10.3018L10.3123 10.315C10.2135 10.409 10.1348 10.5221 10.0811 10.6475C10.0273 10.773 9.99961 10.908 9.99961 11.0445C9.99961 11.181 10.0273 11.316 10.0811 11.4415C10.1348 11.5669 10.2135 11.68 10.3123 11.774L21.7741 22.7115L10.3123 33.6447C10.2135 33.7387 10.1348 33.8518 10.0811 33.9772C10.0273 34.1026 9.99961 34.2377 9.99961 34.3742C9.99961 34.5107 10.0273 34.6457 10.0811 34.7711C10.1348 34.8966 10.2135 35.0097 10.3123 35.1037L10.3254 35.1168C10.5285 35.3108 10.7983 35.4189 11.0789 35.4189C11.3595 35.4189 11.6293 35.3108 11.8324 35.1168L24.004 23.5012C24.1111 23.3991 24.1963 23.2762 24.2545 23.1401C24.3127 23.004 24.3428 22.8574 24.3428 22.7093C24.3428 22.5613 24.3127 22.4147 24.2545 22.2786C24.1963 22.1425 24.1111 22.0196 24.004 21.9175Z"
+                  fill="#616161"
+                />
+              </svg>
+            </Button>
+          </div>
+        </div>
+        <div>
+          <Swiper
+            ref={sliderRef}
+            spaceBetween={50}
+            slidesPerView={2.5}
+            onRealIndexChange={(swiper) => setIndex(swiper.realIndex)}
+          >
+            {itemsData
+              .filter((data) => data.slug !== item.slug)
+              .slice(2, 6)
+              .map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="max-w-[500px] space-y-2 border border-black px-4 py-2">
+                    <Heart className="ml-auto w-fit" />
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      className="h-[421px] w-full object-cover"
+                      width={500}
+                      height={500}
+                    />
+                    <div className="flex justify-between text-lg font-medium">
+                      <span className="">{item.name}</span>
+
+                      <div className="flex items-center gap-2">
+                        <svg
+                          width="21"
+                          height="26"
+                          viewBox="0 0 21 26"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
+                            fill="#333333"
+                          />
+                        </svg>
+
+                        <span>{Math.random().toFixed(2)}</span>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </div>
+
+        <Button
+          className="mx-auto text-2xl font-medium text-gray-500"
+          variant="outline"
+          size="lg"
+        >
+          <Link href="/marketplace">Explore all</Link>
+        </Button>
       </div>
     </main>
   );
