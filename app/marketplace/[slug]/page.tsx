@@ -27,16 +27,15 @@ function Page({
   };
 }) {
   const sliderRef = useRef<SwiperRef | null>(null);
+  const mobileSliderRef = useRef<SwiperRef | null>(null);
   const [index, setIndex] = useState(0);
 
   const handlePrev = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slidePrev();
+    mobileSliderRef.current?.swiper.slidePrev();
   }, []);
 
   const handleNext = useCallback(() => {
-    if (!sliderRef.current) return;
-    sliderRef.current.swiper.slideNext();
+    mobileSliderRef.current?.swiper.slideNext();
   }, []);
 
   const item = itemsData.find((item) => item.slug === params.slug)!;
@@ -203,11 +202,12 @@ function Page({
         </div>
       </div>
 
+      {/* mobile slider */}
       <div className="mx-4 mt-16 space-y-8 sm:hidden">
         <h2 className="text-xl font-medium">More from this collection</h2>
         <div className="relative">
           <Swiper
-            ref={sliderRef}
+            ref={mobileSliderRef}
             onRealIndexChange={(swiper) => setIndex(swiper.realIndex)}
           >
             {itemsData
@@ -215,36 +215,38 @@ function Page({
               .slice(2, 6)
               .map((item) => (
                 <SwiperSlide key={item.id}>
-                  <div className="space-y-2 border border-black px-4 py-2">
-                    <Heart className="ml-auto w-fit" />
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="h-[421px] w-full object-cover"
-                      width={500}
-                      height={500}
-                    />
-                    <div className="flex justify-between text-lg font-medium">
-                      <span className="">{item.name}</span>
+                  <Link href={`/marketplace/${item.slug}`}>
+                    <div className="space-y-2 border border-black px-4 py-2">
+                      <Heart className="ml-auto w-fit" />
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        className="h-[421px] w-full object-cover"
+                        width={500}
+                        height={500}
+                      />
+                      <div className="flex justify-between text-lg font-medium">
+                        <span className="">{item.name}</span>
 
-                      <div className="flex items-center gap-2">
-                        <svg
-                          width="21"
-                          height="26"
-                          viewBox="0 0 21 26"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
-                            fill="#333333"
-                          />
-                        </svg>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="21"
+                            height="26"
+                            viewBox="0 0 21 26"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
+                              fill="#333333"
+                            />
+                          </svg>
 
-                        <span>{Math.random().toFixed(2)}</span>
+                          <span>{Math.random().toFixed(2)}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
           </Swiper>
@@ -296,6 +298,7 @@ function Page({
         </div>
       </div>
 
+      {/* large screen slide */}
       <div className="mt-20 hidden flex-col gap-20 sm:flex">
         <div className="flex items-center justify-between rounded-xl p-4 shadow-lg">
           <span className="text-2xl font-medium">
@@ -308,8 +311,7 @@ function Page({
               className={cn(
                 "flex h-[50px] w-[50px] rotate-180 items-center justify-center rounded-full border border-gray"
               )}
-              disabled={index === 0}
-              onClick={handlePrev}
+              onClick={() => sliderRef.current?.swiper.slidePrev()}
             >
               <svg
                 width="35"
@@ -329,8 +331,7 @@ function Page({
               className={cn(
                 "flex h-[50px] w-[50px] items-center justify-center rounded-full border border-gray"
               )}
-              disabled={index === 2}
-              onClick={handleNext}
+              onClick={() => sliderRef.current?.swiper.slideNext()}
             >
               <svg
                 width="35"
@@ -348,47 +349,44 @@ function Page({
           </div>
         </div>
         <div>
-          <Swiper
-            ref={sliderRef}
-            spaceBetween={50}
-            slidesPerView={2.5}
-            onRealIndexChange={(swiper) => setIndex(swiper.realIndex)}
-          >
+          <Swiper ref={sliderRef} spaceBetween={50} slidesPerView={2.5}>
             {itemsData
               .filter((data) => data.slug !== item.slug)
               .slice(2, 6)
               .map((item) => (
                 <SwiperSlide key={item.id}>
-                  <div className="max-w-[500px] space-y-2 border border-black px-4 py-2">
-                    <Heart className="ml-auto w-fit" />
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      className="h-[421px] w-full object-cover"
-                      width={500}
-                      height={500}
-                    />
-                    <div className="flex justify-between text-lg font-medium">
-                      <span className="">{item.name}</span>
+                  <Link href={`/marketplace/${item.slug}`}>
+                    <div className="max-w-[500px] space-y-2 border border-black px-4 py-2">
+                      <Heart className="ml-auto w-fit" />
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        className="h-[421px] w-full object-cover"
+                        width={500}
+                        height={500}
+                      />
+                      <div className="flex justify-between text-lg font-medium">
+                        <span className="">{item.name}</span>
 
-                      <div className="flex items-center gap-2">
-                        <svg
-                          width="21"
-                          height="26"
-                          viewBox="0 0 21 26"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
-                            fill="#333333"
-                          />
-                        </svg>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="21"
+                            height="26"
+                            viewBox="0 0 21 26"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M20.8107 12.469L11.1888 0.332612C11.107 0.229 11.0025 0.145205 10.8831 0.0875766C10.7638 0.0299487 10.6328 0 10.5 0C10.3672 0 10.2362 0.0299487 10.1169 0.0875766C9.99753 0.145205 9.89298 0.229 9.81116 0.332612L0.189291 12.469C0.0668072 12.6194 0 12.8068 0 13C0 13.1932 0.0668072 13.3806 0.189291 13.531L9.81116 25.6674C9.89298 25.771 9.99753 25.8548 10.1169 25.9124C10.2362 25.9701 10.3672 26 10.5 26C10.6328 26 10.7638 25.9701 10.8831 25.9124C11.0025 25.8548 11.107 25.771 11.1888 25.6674L20.8107 13.531C20.9332 13.3806 21 13.1932 21 13C21 12.8068 20.9332 12.6194 20.8107 12.469ZM11.3747 15.9908V3.36672L18.7442 12.6641L11.3747 15.9908ZM9.62528 15.9908L2.25581 12.6641L9.62528 3.36672V15.9908ZM9.62528 17.8979V22.6333L3.78656 15.2647L9.62528 17.8979Z"
+                              fill="#333333"
+                            />
+                          </svg>
 
-                        <span>{Math.random().toFixed(2)}</span>
+                          <span>{Math.random().toFixed(2)}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               ))}
           </Swiper>
