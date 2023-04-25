@@ -8,18 +8,22 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "Auctions", href: "/auctions", current: false },
-  { name: "Marketplace", href: "/marketplace", current: false },
-  { name: "Drops", href: "/drops", current: false },
+  { name: "Home", href: "/", segment: null },
+  { name: "Auctions", href: "/auctions", segment: "auctions" },
+  { name: "Marketplace", href: "/marketplace", segment: "marketplace" },
+  { name: "Drops", href: "/drops", segment: "drops" },
 ];
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const activeSegment = useSelectedLayoutSegment();
+
+  console.log("activeSegment", activeSegment);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -52,10 +56,9 @@ function Navbar() {
             <li
               key={item.name}
               className={cn(
-                item.current && "font-medium underline",
+                { "font-medium underline": item.segment === activeSegment },
                 "block rounded-md text-2xl"
               )}
-              aria-current={item.current ? "page" : undefined}
             >
               <Link href={item.href}>{item.name}</Link>
             </li>
@@ -92,10 +95,9 @@ function Navbar() {
                 key={item.name}
                 onClick={toggle}
                 className={cn(
-                  item.current && "font-medium underline",
+                  { "font-medium underline": item.segment === activeSegment },
                   "block rounded-md text-2xl"
                 )}
-                aria-current={item.current ? "page" : undefined}
               >
                 <Link href={item.href}>{item.name}</Link>
               </li>

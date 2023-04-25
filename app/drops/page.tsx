@@ -14,21 +14,21 @@ const drops = [
   {
     id: 2,
     name: "Ginger Suburbs",
-    image: "/images/ghost.jpg",
+    image: "/images/masood-aslami.jpg",
     creator: "Tina Benson",
     status: "Live Now",
   },
   {
     id: 3,
     name: "Sink",
-    image: "/images/ghost.jpg",
+    image: "/images/sink.jpg",
     creator: "Aliyah Minat",
     status: "Ended",
   },
   {
     id: 4,
     name: "Warped '99",
-    image: "/images/ghost.jpg",
+    image: "/images/bjorn-pierre.jpg",
     creator: "Tina Benson",
     status: "Ended",
   },
@@ -36,7 +36,7 @@ const drops = [
 
 function Page() {
   return (
-    <div className="space-y-14 px-4 sm:px-20">
+    <div className="mb-4 space-y-14 px-4 sm:px-20">
       <Breadcrumb items={["Home", "Auction", "Live bid", "Drop"]} />
       <div className="flex flex-col items-center justify-center gap-4 text-center">
         <h2 className="text-3xl font-bold text-[#000] sm:text-4xl">
