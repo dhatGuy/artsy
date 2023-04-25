@@ -4,6 +4,7 @@ import "swiper/swiper-bundle.min.css";
 
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { auctions } from "~/DATA/auctions";
@@ -13,7 +14,7 @@ import { cn } from "~/lib/utils";
 
 const topBids = [
   {
-    id: 1,
+    id: 6,
     image: "/images/sebastian-svenson.jpg",
     name: "Out of the Box",
     creator: "Jacobs Banks",
@@ -22,7 +23,7 @@ const topBids = [
     currentBid: "0.987 ETH",
   },
   {
-    id: 2,
+    id: 5,
     image: "/images/federica.jpg",
     name: "Falling Apart",
     creator: "Dan Murray",
@@ -75,21 +76,23 @@ function Page() {
           {auctions.slice(0, 4).map((auction) => (
             <SwiperSlide key={auction.id} className="">
               <div className="relative h-[190px] w-full sm:min-h-[400px]">
-                <Image
-                  src={auction.image}
-                  width={230}
-                  height={190}
-                  alt={auction.name}
-                  className="h-full w-full rounded-lg object-cover object-center"
-                />
+                <Link href={`/auctions/live-bid/${auction.id}`}>
+                  <Image
+                    src={auction.image}
+                    width={230}
+                    height={190}
+                    alt={auction.name}
+                    className="h-full w-full rounded-lg object-cover object-center"
+                  />
 
-                <div className="absolute inset-x-0 bottom-3">
-                  <div className="mx-auto w-fit rounded-md border border-white bg-[rgba(245,244,244,0.24)] px-5 py-2 backdrop-blur-sm">
-                    <span className="text-center font-stix-two text-xl text-white">
-                      6hrs: 30mins: 20secs
-                    </span>
+                  <div className="absolute inset-x-0 bottom-3">
+                    <div className="mx-auto w-fit rounded-md border border-white bg-[rgba(245,244,244,0.24)] px-5 py-2 backdrop-blur-sm">
+                      <span className="text-center font-stix-two text-xl text-white">
+                        6hrs: 30mins: 20secs
+                      </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             </SwiperSlide>
           ))}
@@ -117,7 +120,6 @@ function Page() {
               onClick={() => sliderRef.current?.swiper.slideTo(i, 500, false)}
               className={cn("h-2 w-2 rounded-full bg-[#B8BCB5]", {
                 "bg-[#4693ED]": i === index,
-                // "hidden"
               })}
             />
           ))}
@@ -178,9 +180,11 @@ function Page() {
                   <div className="text-lg">{bid.currentBid}</div>
                 </div>
 
-                <Button className="bg-[#3341C1] px-10">
-                  <span className="font-medium">Place bid</span>
-                </Button>
+                <Link href={`/auctions/live-bid/${bid.id}`}>
+                  <Button className="bg-[#3341C1] px-10">
+                    <span className="font-medium">Place bid</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}
