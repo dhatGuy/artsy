@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  AlignJustify,
-  MessageSquare,
-  Search,
-  ShoppingCart,
-  X,
-} from "lucide-react";
+import { AlignJustify, MessageSquare, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "~/lib/utils";
+import { Bell, ShoppingCart } from "../icons";
 
 const navigation = [
   { name: "Home", href: "/", segment: null },
@@ -65,7 +60,10 @@ function Navbar() {
 
         <div className={cn("flex gap-4")}>
           <Search />
-          <ShoppingCart />
+          <Link href="/marketplace/cart">
+            <ShoppingCart />
+          </Link>
+          <Bell />
         </div>
       </nav>
 
