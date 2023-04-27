@@ -45,6 +45,7 @@ module.exports = {
         "clash-display": ["var(--font-clash-display)", ...fontFamily.sans],
         "stix-two": ["var(--font-stix-two)", ...fontFamily.sans],
         baskervville: ["var(--font-baskervville)", ...fontFamily.sans],
+        cardo: ["var(--font-cardo)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

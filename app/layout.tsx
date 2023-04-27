@@ -1,4 +1,9 @@
-import { Baskervville, Bellefair, STIX_Two_Text } from "next/font/google";
+import {
+  Baskervville,
+  Bellefair,
+  Cardo,
+  STIX_Two_Text,
+} from "next/font/google";
 import localFont from "next/font/local";
 import Footer from "~/components/Footer";
 import Navbar from "~/components/ui/Navbar";
@@ -12,9 +17,15 @@ const bellefair = Bellefair({
 });
 
 const stixTwo = STIX_Two_Text({
-  // weight: "400",
   display: "swap",
   variable: "--font-stix-two",
+  subsets: ["latin"],
+});
+
+const cardo = Cardo({
+  weight: "400",
+  display: "swap",
+  variable: "--font-cardo",
   subsets: ["latin"],
 });
 
@@ -94,7 +105,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bellefair.variable} ${stixTwo.variable} ${baskervville.variable} ${satoshi.variable} ${clashDisplay.variable}`}
+      className={`${bellefair.variable} ${stixTwo.variable} ${baskervville.variable} ${satoshi.variable} ${clashDisplay.variable} ${cardo.variable}`}
     >
       <body>
         <Navbar />

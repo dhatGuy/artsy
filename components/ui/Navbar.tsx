@@ -23,8 +23,6 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const activeSegment = useSelectedLayoutSegment();
 
-  console.log("activeSegment", activeSegment);
-
   const toggle = () => setIsOpen(!isOpen);
 
   useEffect(() => {
