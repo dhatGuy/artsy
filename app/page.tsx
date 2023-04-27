@@ -8,12 +8,9 @@ import Upcoming from "~/components/home/Upcoming";
 import { CircledArrow } from "~/components/ui";
 import { cn } from "~/lib/utils";
 
-const Arrow = ({ className, to }: { className?: string; to: string }) => {
+const Arrow = ({ className }: { className?: string }) => {
   return (
-    <Link
-      href={to}
-      className={cn("flex items-center justify-center", className)}
-    >
+    <div className={cn("flex items-center justify-center", className)}>
       <svg
         width="101"
         height="91"
@@ -26,7 +23,7 @@ const Arrow = ({ className, to }: { className?: string; to: string }) => {
           fill="#4693ED"
         />
       </svg>
-    </Link>
+    </div>
   );
 };
 
@@ -60,11 +57,13 @@ export default function Home() {
             <h2 className="text-2xl font-medium md:text-5xl md:text-gray">
               {item.title}
             </h2>
-            <Arrow className="hidden md:block lg:mr-64" to={item.path} />
-            <CircledArrow
-              className="h-[54px] w-[54px] border-[#000] md:hidden"
-              fill="#616161"
-            />
+            <Link href={item.path}>
+              <Arrow className="hidden md:block lg:mr-64" />
+              <CircledArrow
+                className="h-[54px] w-[54px] border-[#000] md:hidden"
+                fill="#616161"
+              />
+            </Link>
           </div>
         ))}
       </div>
