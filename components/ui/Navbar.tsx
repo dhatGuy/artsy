@@ -4,7 +4,9 @@ import { AlignJustify, MessageSquare, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSnapshot } from "valtio";
 import { cn } from "~/lib/utils";
+import { state } from "~/state";
 import { Bell, ShoppingCart } from "../icons";
 
 const navigation = [
@@ -17,6 +19,8 @@ const navigation = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const activeSegment = useSelectedLayoutSegment();
+
+  const { cart } = useSnapshot(state);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -60,7 +64,15 @@ function Navbar() {
 
         <div className={cn("flex gap-4")}>
           <Search />
-          <Link href="/marketplace/cart">
+          <Link href="/marketplace/cart" className="relative">
+            <div
+              className={cn(
+                "absolute h-2 -right-1.5 -top-1.5 rounded-full w-2 bg-[#E31616]",
+                {
+                  hidden: cart.length === 0,
+                }
+              )}
+            />
             <ShoppingCart />
           </Link>
           <Bell />

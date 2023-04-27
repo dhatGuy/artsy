@@ -1,8 +1,9 @@
 import { Plus } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { cn } from "~/lib/utils";
+import { clearCart } from "~/state";
 import { Breadcrumb } from "./ui";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
@@ -17,6 +18,7 @@ const paymentIcons = [
 
 function Payment({ className }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     window.scrollTo({
@@ -24,6 +26,12 @@ function Payment({ className }: { className?: string }) {
       behavior: "smooth",
     });
   }, []);
+
+  const onSubmit = () => {
+    clearCart();
+
+    router.push("/thank-you");
+  };
 
   return (
     <div
@@ -157,19 +165,12 @@ function Payment({ className }: { className?: string }) {
               </div>
             </div>
           </div>
-          <Link
-            href={{
-              pathname: "/thank-you",
-              // query: {
-              //   from: "checkout",
-              // },
-            }}
-            className="mx-auto mt-7"
+          <Button
+            onClick={() => onSubmit()}
+            className="mx-auto mt-7 h-14 w-72 bg-[#3341C1] text-lg font-medium hover:bg-blue-800"
           >
-            <Button className="h-14 w-72 bg-[#3341C1] text-lg font-medium hover:bg-blue-800">
-              Confirm
-            </Button>
-          </Link>
+            Confirm
+          </Button>
         </div>
 
         <div className="flex-col gap-6 px-4 sm:flex lg:w-1/3">

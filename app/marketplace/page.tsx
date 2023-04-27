@@ -159,7 +159,7 @@ function Marketplace() {
                   {item.name}
                 </p>
                 <span className="font-medium md:text-2xl md:font-bold">
-                  {item.price}
+                  ${item.price.toFixed(2)}
                 </span>
               </div>
             </div>

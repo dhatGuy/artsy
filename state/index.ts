@@ -2,22 +2,38 @@ import { proxy } from "valtio";
 import { devtools } from "valtio/utils";
 import { itemsData } from "~/DATA/items";
 
-type Item = (typeof itemsData)[number] & { quantity: number };
-type Cart = Item[];
+export type Item = (typeof itemsData)[number];
+export type CartItem = (typeof itemsData)[number] & { quantity: number };
+export type Cart = CartItem[];
 type State = { cart: Cart; total: number };
 
 export const state = proxy<State>({
   cart: [],
-  total: 0,
+  get total() {
+    return this.cart.reduce(
+      (acc: number, item: { price: number; quantity: number }) => {
+        return acc + item.price * item.quantity;
+      },
+      0
+    );
+  },
 });
 
-export const addToCart = (item: Item) => {
+export const addToCart = (item: Item, quantity = 1) => {
+  const itemExists = state.cart.find((i) => i.id === item.id);
+
+  if (itemExists) {
+    itemExists.quantity = quantity;
+  } else {
+    state.cart.push({ ...item, quantity });
+  }
+};
+
+export const incrementQuantity = (item: Item) => {
   const itemExists = state.cart.find((i) => i.id === item.id);
 
   if (itemExists) {
     itemExists.quantity += 1;
-  } else {
-    state.cart.push({ ...item, quantity: 1 });
   }
 };
 
@@ -47,11 +63,11 @@ export const calculateTotal = () => {
   }, 0);
 };
 
-export const updateQuantity = (item: Item) => {
+export const updateQuantity = (item: Item, quantity: number) => {
   const itemExists = state.cart.find((i) => i.id === item.id);
 
   if (itemExists) {
-    itemExists.quantity = item.quantity;
+    itemExists.quantity = quantity;
   }
 };
 

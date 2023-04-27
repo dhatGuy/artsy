@@ -1,15 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useSnapshot } from "valtio";
 import Payment from "~/components/Payment";
 import ShippingDetails from "~/components/ShippingDetails";
 import ShoppingCart from "~/components/ShoppingCart";
 import useMediaQuery from "~/hooks/useMediaQuery";
 import { cn } from "~/lib/utils";
+import { state } from "~/state";
 
 function Page() {
   const [step, setStep] = useState(0);
   const matches = useMediaQuery("(min-width: 1024px)");
+  const cartState = useSnapshot(state);
 
   return (
     <>
@@ -22,7 +25,7 @@ function Page() {
                 "font-medium text-black border-[#2F4333]": step === 0,
               }
             )}
-            onClick={() => setStep(0)}
+            onClick={() => (cartState.cart.length === 0 ? null : setStep(0))}
           >
             Shopping cart
           </li>
@@ -34,7 +37,7 @@ function Page() {
                 "font-medium text-black border-[#2F4333]": step === 1,
               }
             )}
-            onClick={() => setStep(1)}
+            onClick={() => (cartState.cart.length === 0 ? null : setStep(1))}
           >
             Shopping details
           </li>
@@ -46,7 +49,7 @@ function Page() {
                 "font-medium text-black border-[#2F4333]": step === 2,
               }
             )}
-            onClick={() => setStep(2)}
+            onClick={() => (cartState.cart.length === 0 ? null : setStep(2))}
           >
             Payment details
           </li>

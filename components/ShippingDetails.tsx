@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
+import { useSnapshot } from "valtio";
 import { cn } from "~/lib/utils";
+import { state } from "~/state";
 import { Breadcrumb } from "./ui";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
@@ -15,6 +17,7 @@ function ShippingDetails({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const cartState = useSnapshot(state);
 
   useEffect(() => {
     window.scrollTo({
@@ -124,6 +127,7 @@ function ShippingDetails({
           <Button
             onClick={next}
             type="button"
+            disabled={cartState.cart.length === 0}
             className="bg-[#3341C1] px-12 py-6 text-lg hover:bg-blue-600"
           >
             Proceed to payment

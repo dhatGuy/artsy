@@ -5,7 +5,7 @@ import "swiper/swiper-bundle.min.css";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { itemsData } from "~/DATA/items";
 import { Breadcrumb } from "~/components/ui";
@@ -18,6 +18,7 @@ import {
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { cn } from "~/lib/utils";
+import { Item, addToCart } from "~/state";
 
 function Page({
   params,
@@ -28,6 +29,7 @@ function Page({
 }) {
   const sliderRef = useRef<SwiperRef | null>(null);
   const mobileSliderRef = useRef<SwiperRef | null>(null);
+  const [quantity, setQuantity] = useState(1);
   const [index, setIndex] = useState(0);
 
   const handlePrev = useCallback(() => {
@@ -38,9 +40,13 @@ function Page({
     mobileSliderRef.current?.swiper.slideNext();
   }, []);
 
-  const item = itemsData.find((item) => item.slug === params.slug)!;
+  const item: Item = itemsData.find((item) => item.slug === params.slug)!;
 
   const breadcrumbItems = ["Home", "Marketplace", "Editorials", item.name];
+
+  const randomPrice = useMemo(() => {
+    return Math.random().toFixed(2);
+  }, []);
 
   return (
     <main className="sm:px-20">
@@ -82,7 +88,7 @@ function Page({
                 />
               </svg>
               <span className="font-stix-two text-3xl font-medium">
-                {Math.random().toFixed(2)}
+                {randomPrice}
               </span>
             </div>
           </div>
@@ -99,6 +105,9 @@ function Page({
               <Button
                 type="button"
                 variant="ghost"
+                onClick={() =>
+                  setQuantity(() => (quantity > 1 ? quantity - 1 : 1))
+                }
                 className="h-10 w-10 text-2xl font-medium leading-10 text-gray-600 transition hover:opacity-75"
               >
                 &minus;
@@ -107,13 +116,17 @@ function Page({
               <Input
                 type="number"
                 id="Quantity"
-                defaultValue="1"
+                name="Quantity"
+                min={1}
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
                 className="h-10 w-10 rounded border-none text-2xl font-medium [-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
               />
 
               <Button
                 type="button"
                 variant="ghost"
+                onClick={() => setQuantity(() => quantity + 1)}
                 className="h-10 w-10 text-2xl font-medium leading-10 text-gray-600 transition hover:opacity-75"
               >
                 &#43;
@@ -124,6 +137,7 @@ function Page({
               <Button
                 type="button"
                 className="flex items-center bg-[#3341C1] px-10 py-6 text-lg font-medium"
+                onClick={() => addToCart(item, quantity)}
               >
                 Add to cart{" "}
                 <svg
