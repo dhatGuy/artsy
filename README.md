@@ -3,6 +3,7 @@
 ## Description
 
 This is a simple app that allows users to search for art and save their favorite pieces.
+It uses Nextjs 13 App router which is still in beta (some/one page(s) breaks).
 
 ## Design
 
