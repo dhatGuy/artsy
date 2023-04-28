@@ -3,7 +3,7 @@
 import { Eye, Send, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { auctions } from "~/DATA/auctions";
 import LiveReactions from "~/components/icons/LiveReactions";
 import { Breadcrumb, CircledArrow } from "~/components/ui";
@@ -40,6 +40,8 @@ export default function Page({
     id: string;
   };
 }) {
+  const router = useRouter();
+
   const { id } = params;
   const auction = auctions.find((auction) => auction.id === +id);
 
@@ -66,7 +68,7 @@ export default function Page({
                 <Eye size={20} fill="white" stroke="#B0B9BD" />
                 <span className="text-sm font-medium">295</span>
               </div>
-              <X className="ml-2" />
+              <X className="ml-2" onClick={() => router.push("/auctions")} />
             </div>
           </div>
 
@@ -129,7 +131,7 @@ export default function Page({
             >
               <div className="flex items-center justify-between px-4 pt-2">
                 <div className="rounded-full bg-[#9A9D9E] p-1">
-                  <X />
+                  <X onClick={() => router.push("/auctions")} />
                 </div>
                 <div className="rounded-3xl bg-[#4693ED] px-4 py-px text-sm font-medium">
                   LIVE

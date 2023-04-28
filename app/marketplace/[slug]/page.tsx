@@ -67,7 +67,7 @@ function Page({
 
           <div className="flex justify-between font-medium sm:hidden">
             <span className="uppercase">{item.name}</span>
-            <span>{item.price}</span>
+            <span>${item.price}</span>
           </div>
         </div>
 
