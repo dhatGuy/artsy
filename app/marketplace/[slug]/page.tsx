@@ -67,7 +67,7 @@ function Page({
 
           <div className="flex justify-between font-medium sm:hidden">
             <span className="uppercase">{item.name}</span>
-            <span>${item.price}</span>
+            <span>${item.price.toFixed(2)}</span>
           </div>
         </div>
 
@@ -256,7 +256,7 @@ function Page({
                             />
                           </svg>
 
-                          <span>{Math.random().toFixed(2)}</span>
+                          <span>{randomPrice}</span>
                         </div>
                       </div>
                     </div>
@@ -396,7 +396,7 @@ function Page({
                             />
                           </svg>
 
-                          <span>{Math.random().toFixed(2)}</span>
+                          <span>{randomPrice}</span>
                         </div>
                       </div>
                     </div>
