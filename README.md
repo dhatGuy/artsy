@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/github/dhatGuy/artsy.svg)](https://wakatime.com/badge/github/dhatGuy/artsy?style=flat)
+
 # Artsy
 
 ## Description
