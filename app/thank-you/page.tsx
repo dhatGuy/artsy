@@ -1,14 +1,11 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { DeliveryWoman, GradientCircle } from "~/components/icons";
 
 function Page() {
-  const searchParams = useSearchParams();
-
   return (
     <>
-      <div className="absolute -left-36 -top-16 hidden sm:block">
+      <div className="absolute -left-36 -top-16 hidden sm:block -z-10">
         <GradientCircle />
       </div>
       <div className="relative grid min-h-[90vh] place-content-center justify-items-center gap-8 px-3">

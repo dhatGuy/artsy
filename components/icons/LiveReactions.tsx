@@ -7,7 +7,7 @@ function LiveReactions({ w = 45, h = 169 }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="30.5" cy="154.5" r="14.5" fill="white" fill-opacity="0.35" />
+      <circle cx="30.5" cy="154.5" r="14.5" fill="white" fillOpacity="0.35" />
       <g filter="url(#filter0_i_0_1)">
         <path
           d="M34.8182 147C33.0045 147 31.4068 147.933 30.5 149.4C29.5932 147.933 27.9955 147 26.1818 147C23.3318 147 21 149.4 21 152.333C21 157.622 30.5 163 30.5 163C30.5 163 40 157.667 40 152.333C40 149.4 37.6682 147 34.8182 147Z"
@@ -57,9 +57,9 @@ function LiveReactions({ w = 45, h = 169 }) {
           width="19"
           height="20"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend
             mode="normal"
             in="SourceGraphic"

@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 
 import { Eye, Send, X } from "lucide-react";
 import Image from "next/image";

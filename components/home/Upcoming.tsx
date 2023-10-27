@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.min.css";
+import "swiper/css";
 
 import { cn } from "~/lib/utils";
 

@@ -30,7 +30,8 @@ function Marketplace() {
   const [data, setData] = useState(itemsData.slice(0, 6));
 
   const handleLoadMore = () => {
-    setData(itemsData);
+    console.log([...data, ...itemsData.slice(6)])
+    setData((d) => [...d, ...itemsData.slice(6)]);
   };
 
   return (

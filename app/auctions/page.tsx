@@ -1,16 +1,16 @@
 "use client";
 
-import "swiper/swiper-bundle.min.css";
+import 'swiper/css';
 
 import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { auctions } from "~/DATA/auctions";
 import { Breadcrumb } from "~/components/ui";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
 const topBids = [
   {
